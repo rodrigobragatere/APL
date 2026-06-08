@@ -166,12 +166,26 @@ function renderDashboard() {
   const regioes = [...new Set(apls.map((a) => a.regiao))];
   const casosConhecidos = apls.filter((a) => a.casoConhecido);
   const popTotal = apls.reduce((s, a) => s + (a.ibge?.populacao || 0), 0);
-  const pibMedio = apls.filter((a) => a.ibge?.pibPerCapita).length
-    ? Math.round(apls.filter((a) => a.ibge?.pibPerCapita).reduce((s, a) => s + a.ibge.pibPerCapita, 0) / apls.filter((a) => a.ibge?.pibPerCapita).length)
+  const aplsComPib = apls.filter((a) => a.ibge?.pibPerCapita && a.ibge?.populacao);
+  const pibMedio = aplsComPib.length
+    ? Math.round(aplsComPib.reduce((s, a) => s + a.ibge.pibPerCapita, 0) / aplsComPib.length)
     : 0;
+  const pibTotal = aplsComPib.reduce((s, a) => s + a.ibge.pibPerCapita * a.ibge.populacao, 0);
+  const pibTotalFmt = pibTotal >= 1e9
+    ? `R$ ${(pibTotal / 1e9).toFixed(1).replace('.', ',')} bi`
+    : pibTotal >= 1e6
+      ? `R$ ${(pibTotal / 1e6).toFixed(1).replace('.', ',')} mi`
+      : pibTotal ? formatCurrency(pibTotal).replace(',00', '') : '—';
   const topicosAtivos = [...new Set(apls.map((a) => a.topico).filter(Boolean))];
 
   $('#kpi-grid').innerHTML = `
+    <div class="kpi-card kpi-card--wide kpi-card--warning">
+      <div class="kpi-card__info">
+        <div class="kpi-card__label">Gargalos</div>
+        <div class="kpi-card__sub">Indicadores &lt; 60% — prioridade de intervenção</div>
+      </div>
+      <div class="kpi-card__value">${allGargalos.length}</div>
+    </div>
     <div class="kpi-card kpi-card--primary">
       <div class="kpi-card__label">APLs Cadastrados</div>
       <div class="kpi-card__value">${apls.length}</div>
@@ -192,15 +206,19 @@ function renderDashboard() {
       <div class="kpi-card__value">${popTotal >= 1e6 ? `${(popTotal / 1e6).toFixed(1)}M` : formatNumber(popTotal)}</div>
       <div class="kpi-card__sub">Soma municípios-sede</div>
     </div>
-    <div class="kpi-card kpi-card--ibge">
-      <div class="kpi-card__label">PIB per capita médio</div>
-      <div class="kpi-card__value">${pibMedio ? formatCurrency(pibMedio).replace(',00', '') : '—'}</div>
-      <div class="kpi-card__sub">IBGE — PIB Municipal</div>
+    <div class="kpi-card kpi-card--wide-half kpi-card--ibge">
+      <div class="kpi-card__info">
+        <div class="kpi-card__label">PIB per capita total</div>
+        <div class="kpi-card__sub">IBGE — PIB Municipal · total dos municípios-sede</div>
+      </div>
+      <div class="kpi-card__value">${pibTotalFmt}</div>
     </div>
-    <div class="kpi-card kpi-card--warning">
-      <div class="kpi-card__label">Gargalos</div>
-      <div class="kpi-card__value">${allGargalos.length}</div>
-      <div class="kpi-card__sub">Indicadores &lt; 60%</div>
+    <div class="kpi-card kpi-card--wide-half kpi-card--ibge">
+      <div class="kpi-card__info">
+        <div class="kpi-card__label">PIB per capita médio</div>
+        <div class="kpi-card__sub">IBGE — PIB Municipal · média dos municípios-sede</div>
+      </div>
+      <div class="kpi-card__value">${pibMedio ? formatCurrency(pibMedio).replace(',00', '') : '—'}</div>
     </div>
   `;
 
@@ -238,11 +256,12 @@ function renderRadarChart(scores, dims) {
       }],
     },
     options: baseChartOptions({
+      layout: { padding: 18 },
       scales: {
         r: {
           min: 0, max: 100,
           ticks: { stepSize: 20, font: { size: 10 } },
-          pointLabels: { font: { size: 11 } },
+          pointLabels: { font: { size: 10 } },
         },
       },
       plugins: { legend: { display: false } },
@@ -306,7 +325,13 @@ function renderDistribuicaoChart(apls) {
       }],
     },
     options: baseChartOptions({
-      plugins: { legend: { position: 'bottom', display: counts.length > 1 } },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          display: counts.length > 1,
+          labels: { font: { size: 10 }, padding: 8, boxWidth: 10 },
+        },
+      },
     }),
   });
 }
