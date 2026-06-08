@@ -1,0 +1,335 @@
+{
+  "meta": {
+    "titulo": "Modelo de Avaliação de Desempenho de APLs",
+    "fonte": "Cardoso & Mendonça — Capítulo 3, Sustentabilidade e Responsabilidade Social, Vol. 1",
+    "versao": "1.0.0",
+    "atualizadoEm": "2026-05-27"
+  },
+  "dimensoes": [
+    {
+      "id": "governanca",
+      "nome": "Governança",
+      "descricao": "Estrutura institucional, liderança e canais de coordenação entre atores do arranjo.",
+      "cor": "#2563eb",
+      "condicionantes": ["construcao-institucional", "estrutura-governanca", "lideranca"]
+    },
+    {
+      "id": "cooperacao",
+      "nome": "Cooperação",
+      "descricao": "Confiança, cooperação horizontal e eficiência coletiva entre empresas e agentes locais.",
+      "cor": "#059669",
+      "condicionantes": ["cooperacao", "confianca-agentes", "eficiencia-coletiva"]
+    },
+    {
+      "id": "inovacao",
+      "nome": "Inovação",
+      "descricao": "Capacidade competitiva, desenvolvimento tecnológico e difusão de conhecimento.",
+      "cor": "#d97706",
+      "condicionantes": ["capacidade-competicao", "desenvolvimento-tecnologico", "criacao-conhecimento-inovacao"]
+    },
+    {
+      "id": "impacto-socioeconomico",
+      "nome": "Impacto Socioeconômico",
+      "descricao": "Emprego, renda, trajetória evolutiva, inserção mercadológica e tecido social.",
+      "cor": "#7c3aed",
+      "condicionantes": [
+        "geracao-emprego",
+        "trajetoria-evolutiva",
+        "tecido-social",
+        "insercao-mercados",
+        "empresas-correlatas",
+        "especializacao-produtiva"
+      ]
+    }
+  ],
+  "condicionantes": [
+    {
+      "id": "capacidade-competicao",
+      "nome": "Capacidade de Competição",
+      "definicao": "Elementos responsáveis pela melhoria da competitividade individual e coletiva das empresas.",
+      "autores": ["Suzigan, Garcia e Furtado (2002)", "Porter (1999)", "Mendonça (2008)"],
+      "indicadorId": "esforco-pd",
+      "dimensaoId": "inovacao"
+    },
+    {
+      "id": "trajetoria-evolutiva",
+      "nome": "Trajetória Evolutiva",
+      "definicao": "Evolução da produção, qualidade e comercialização de um APL.",
+      "autores": ["Suzigan, Garcia e Furtado (2002)", "Porter (1999a)", "Mendonça (2008)"],
+      "indicadorId": "valor-adicionado",
+      "dimensaoId": "impacto-socioeconomico"
+    },
+    {
+      "id": "geracao-emprego",
+      "nome": "Geração de Emprego",
+      "definicao": "Participação das unidades de produção no aumento do emprego e da renda.",
+      "autores": ["Suzigan, Garcia e Furtado (2002)", "Mendonça (2008)"],
+      "indicadorId": "relevancia-emprego",
+      "dimensaoId": "impacto-socioeconomico"
+    },
+    {
+      "id": "desenvolvimento-tecnologico",
+      "nome": "Desenvolvimento Tecnológico",
+      "definicao": "Vantagem competitiva sustentável por meio de P&D e cooperação com instituições de pesquisa.",
+      "autores": ["Suzigan, Garcia e Furtado (2002)", "Haddad (2001)", "Mendonça (2008)"],
+      "indicadorId": "esforco-atualizacao-tecnologica",
+      "dimensaoId": "inovacao"
+    },
+    {
+      "id": "insercao-mercados",
+      "nome": "Inserção nos Mercados Interno e Externo",
+      "definicao": "Capacidade produtiva e mercadológica para concorrência sustentável.",
+      "autores": ["Suzigan, Garcia e Furtado (2002)", "Mendonça (2008)"],
+      "indicadorId": "participacao-mercados",
+      "dimensaoId": "impacto-socioeconomico"
+    },
+    {
+      "id": "empresas-correlatas",
+      "nome": "Empresas Correlatas",
+      "definicao": "Presença de fornecedores locais especializados capazes de gerar ganhos de eficiência e inovação.",
+      "autores": ["Porter (1999a)", "Zaccarelli (1995)", "Mendonça (2008)"],
+      "indicadorId": "quociente-locacional",
+      "dimensaoId": "impacto-socioeconomico"
+    },
+    {
+      "id": "construcao-institucional",
+      "nome": "Construção Institucional",
+      "definicao": "Legitimação de organizações com resultados expressivos e interação entre agentes.",
+      "autores": ["Suzigan, Garcia e Furtado (2002)", "Casarotto Filho e Pires (2001)", "Mendonça (2008)"],
+      "indicadorId": "pct-instituicoes-dinamizam",
+      "dimensaoId": "governanca"
+    },
+    {
+      "id": "tecido-social",
+      "nome": "Tecido Social",
+      "definicao": "Capital social, confiança mútua, participação e cooperação horizontal entre atores.",
+      "autores": ["Suzigan, Garcia e Furtado (2002)", "Majocchi e Presutti (2009)", "Mendonça (2008)"],
+      "indicadorId": "indice-gini-locacional",
+      "dimensaoId": "impacto-socioeconomico"
+    },
+    {
+      "id": "especializacao-produtiva",
+      "nome": "Especialização Produtiva",
+      "definicao": "Conhecimento tácito ou explícito em torno de uma atividade econômica principal.",
+      "autores": ["Porter (1999a)", "Zaccarelli (1995)", "Suzigan et al. (2003)"],
+      "indicadorId": "quociente-locacional",
+      "dimensaoId": "impacto-socioeconomico"
+    },
+    {
+      "id": "lideranca",
+      "nome": "Liderança",
+      "definicao": "Organização que influencia os demais atores para atingir objetivos comuns.",
+      "autores": ["Suzigan, Garcia e Furtado (2002)", "Mendonça (2008)"],
+      "indicadorId": "relevancia-empresarial",
+      "dimensaoId": "governanca"
+    },
+    {
+      "id": "confianca-agentes",
+      "nome": "Confiança entre Agentes",
+      "definicao": "Padrões históricos de associativismo e interesses de longo prazo.",
+      "autores": ["Casarotto Filho e Pires (2001)", "Haddad (2001)", "Mendonça (2008)"],
+      "indicadorId": "taxa-cooperacao",
+      "dimensaoId": "cooperacao"
+    },
+    {
+      "id": "cooperacao",
+      "nome": "Cooperação",
+      "definicao": "Relações mantidas entre empresas frente ao ambiente instável de negociação.",
+      "autores": ["Suzigan, Garcia e Furtado (2002)", "Olave e Amato Neto (2005)", "Mendonça (2008)"],
+      "indicadorId": "taxa-cooperacao",
+      "dimensaoId": "cooperacao"
+    },
+    {
+      "id": "estrutura-governanca",
+      "nome": "Estrutura de Governança",
+      "definicao": "Canais capazes de coordenar ações de negócios e processos decisórios entre atores.",
+      "autores": ["Porter (1999a, 1999b)", "Olave e Amato Neto (2005)", "Mendonça (2008)"],
+      "indicadorId": "num-organizacoes-estruturadas",
+      "dimensaoId": "governanca"
+    },
+    {
+      "id": "eficiencia-coletiva",
+      "nome": "Eficiência Coletiva",
+      "definicao": "Capacidade de redução de gastos associados às transações entre agentes econômicos.",
+      "autores": ["Schmitz (1995, 1997)", "Cassiolato e Lastres (2003)", "Britto (2002)"],
+      "indicadorId": "relevancia-valor-transformacao",
+      "dimensaoId": "cooperacao"
+    },
+    {
+      "id": "criacao-conhecimento-inovacao",
+      "nome": "Criação e Difusão de Conhecimento e Inovação",
+      "definicao": "Processo de aprendizagem que resulta em novos produtos, técnicas, formas de organização e mercados.",
+      "autores": ["Olave e Amato Neto (2005)", "Crocco et al. (2003)", "Mendonça (2008)"],
+      "indicadorId": "aprendizagem-interna",
+      "dimensaoId": "inovacao"
+    }
+  ],
+  "indicadores": [
+    {
+      "id": "esforco-pd",
+      "nome": "Esforço de P&D",
+      "formula": "ESP&D = Σ(GASP&D_i) / Σ(FAT_i) × 100",
+      "unidade": "%",
+      "tipo": "quantitativo",
+      "fontesPrimarias": ["ABIT", "SEBRAE", "Instituições de Classe"],
+      "fontesSecundarias": [],
+      "interpretacao": "Quanto maior, maior a capacidade de competição do APL.",
+      "faixaReferencia": { "min": 0, "max": 15, "ideal": 5 }
+    },
+    {
+      "id": "valor-adicionado",
+      "nome": "Valor Adicionado à Produção",
+      "formula": "VAP = (RLV - CO - GASSAL) / PEOC × 100",
+      "unidade": "%",
+      "tipo": "quantitativo",
+      "fontesPrimarias": ["ABIT", "SEBRAE", "Instituições de Classe"],
+      "fontesSecundarias": [],
+      "interpretacao": "Quanto maior, maior o valor agregado nas atividades do APL.",
+      "faixaReferencia": { "min": 0, "max": 100, "ideal": 40 }
+    },
+    {
+      "id": "relevancia-emprego",
+      "nome": "Relevância do Emprego",
+      "formula": "RELEMPR = EMPR_APL / EMPR_município",
+      "unidade": "UN",
+      "tipo": "quantitativo",
+      "fontesPrimarias": [],
+      "fontesSecundarias": ["RAIS / MTE", "IBGE"],
+      "interpretacao": "Quanto maior, melhor a posição do APL quanto à geração de emprego.",
+      "faixaReferencia": { "min": 0, "max": 1, "ideal": 0.3 }
+    },
+    {
+      "id": "esforco-atualizacao-tecnologica",
+      "nome": "Esforço de Atualização Tecnológica",
+      "formula": "ESA&T = Σ(GAS_A&T_i) / Σ(FAT_i) × 100",
+      "unidade": "%",
+      "tipo": "quantitativo",
+      "fontesPrimarias": ["ABIT", "SEBRAE", "Instituições de Classe"],
+      "fontesSecundarias": [],
+      "interpretacao": "Maior esforço indica maior vantagem competitiva sustentável.",
+      "faixaReferencia": { "min": 0, "max": 20, "ideal": 8 }
+    },
+    {
+      "id": "participacao-mercados",
+      "nome": "% Participação nos Mercados Interno e Externo",
+      "formula": "PM = (FAT_interno + FAT_externo) / FAT_total × 100",
+      "unidade": "%",
+      "tipo": "quantitativo",
+      "fontesPrimarias": ["ABIT", "SEBRAE"],
+      "fontesSecundarias": ["IBGE", "FIESC"],
+      "interpretacao": "Monitora evolução e inserção mercadológica das empresas do APL.",
+      "faixaReferencia": { "min": 0, "max": 100, "ideal": 60 }
+    },
+    {
+      "id": "quociente-locacional",
+      "nome": "Quociente Locacional (QL)",
+      "formula": "QL = (Emp_i / Emp_total_mun) / (Emp_i_reg / Emp_total_reg)",
+      "unidade": "UN",
+      "tipo": "quantitativo",
+      "fontesPrimarias": [],
+      "fontesSecundarias": ["RAIS / MTE", "IBGE"],
+      "interpretacao": "QL > 1 e participação relativa > 1% indicam APL denso (Britto & Albuquerque, 2002).",
+      "faixaReferencia": { "min": 0, "max": 5, "ideal": 1.5 }
+    },
+    {
+      "id": "pct-instituicoes-dinamizam",
+      "nome": "% Instituições que Dinamizam o APL",
+      "formula": "PI = nI / nE × 100",
+      "unidade": "%",
+      "tipo": "quantitativo",
+      "fontesPrimarias": ["FIESC", "SEBRAE", "Prefeitura", "Instituições de Classe"],
+      "fontesSecundarias": [],
+      "interpretacao": "Indicativo da construção institucional do arranjo.",
+      "faixaReferencia": { "min": 0, "max": 50, "ideal": 15 }
+    },
+    {
+      "id": "indice-gini-locacional",
+      "nome": "Índice de Gini Locacional",
+      "formula": "IG = desigualdade na distribuição de renda domiciliar per capita",
+      "unidade": "%",
+      "tipo": "quantitativo",
+      "fontesPrimarias": [],
+      "fontesSecundarias": ["IBGE", "Prefeitura"],
+      "interpretacao": "0 = igualdade máxima; 1 = desigualdade máxima. Valores menores favorecem tecido social.",
+      "faixaReferencia": { "min": 0, "max": 1, "ideal": 0.4, "inverso": true }
+    },
+    {
+      "id": "relevancia-empresarial",
+      "nome": "Relevância Empresarial",
+      "formula": "RELESTAB = ESTAB_APL / ESTAB_região × 100",
+      "unidade": "%",
+      "tipo": "quantitativo",
+      "fontesPrimarias": [],
+      "fontesSecundarias": ["RAIS / MTE", "IBGE"],
+      "interpretacao": "Quanto maior, mais evidente a importância das atividades do arranjo para a região.",
+      "faixaReferencia": { "min": 0, "max": 100, "ideal": 25 }
+    },
+    {
+      "id": "taxa-cooperacao",
+      "nome": "Taxa de Cooperação",
+      "formula": "TAXCOOP = EMPR_coop / EMPR_total × 100",
+      "unidade": "%",
+      "tipo": "quantitativo",
+      "fontesPrimarias": [],
+      "fontesSecundarias": ["PINTEC", "SEBRAE"],
+      "interpretacao": "Quanto maior, maior o grau de cooperação entre empresas do APL.",
+      "faixaReferencia": { "min": 0, "max": 100, "ideal": 45 }
+    },
+    {
+      "id": "num-organizacoes-estruturadas",
+      "nome": "Nº Organizações Estruturadas (Governança)",
+      "formula": "Contagem de organizações que coordenam transações institucionais e mercadológicas",
+      "unidade": "UN",
+      "tipo": "quantitativo",
+      "fontesPrimarias": ["SEBRAE", "Prefeitura", "Instituições de Classe"],
+      "fontesSecundarias": [],
+      "interpretacao": "Quanto maior, melhor a representatividade dos atores perante o ambiente externo.",
+      "faixaReferencia": { "min": 0, "max": 20, "ideal": 5 }
+    },
+    {
+      "id": "relevancia-valor-transformacao",
+      "nome": "Relevância do Valor da Transformação",
+      "formula": "VT_APL = ΣVT_ativ / ΣVT_total × 100",
+      "unidade": "%",
+      "tipo": "quantitativo",
+      "fontesPrimarias": [],
+      "fontesSecundarias": ["IBGE (PIA, PAS, PAIC, PAC)"],
+      "interpretacao": "Quanto maior, maior o nível de eficiência coletiva.",
+      "faixaReferencia": { "min": 0, "max": 100, "ideal": 35 }
+    },
+    {
+      "id": "aprendizagem-interna",
+      "nome": "Aprendizagem Interna",
+      "formula": "Alta=1; Média=0,66; Baixa=0,33; Sem=0",
+      "unidade": "UN",
+      "tipo": "qualitativo",
+      "fontesPrimarias": [],
+      "fontesSecundarias": ["PINTEC"],
+      "interpretacao": "Mede importância do P&D como fonte de aprendizagem (Stallivieri, 2009).",
+      "faixaReferencia": { "min": 0, "max": 1, "ideal": 0.8 },
+      "escalaQualitativa": [
+        { "valor": 1, "rotulo": "Alta importância" },
+        { "valor": 0.66, "rotulo": "Média importância" },
+        { "valor": 0.33, "rotulo": "Baixa importância" },
+        { "valor": 0, "rotulo": "Sem importância" }
+      ]
+    }
+  ],
+  "associacoes": [
+    { "condicionanteId": "capacidade-competicao", "indicadorId": "esforco-pd" },
+    { "condicionanteId": "trajetoria-evolutiva", "indicadorId": "valor-adicionado" },
+    { "condicionanteId": "geracao-emprego", "indicadorId": "relevancia-emprego" },
+    { "condicionanteId": "desenvolvimento-tecnologico", "indicadorId": "esforco-atualizacao-tecnologica" },
+    { "condicionanteId": "insercao-mercados", "indicadorId": "participacao-mercados" },
+    { "condicionanteId": "empresas-correlatas", "indicadorId": "quociente-locacional" },
+    { "condicionanteId": "construcao-institucional", "indicadorId": "pct-instituicoes-dinamizam" },
+    { "condicionanteId": "tecido-social", "indicadorId": "indice-gini-locacional" },
+    { "condicionanteId": "especializacao-produtiva", "indicadorId": "quociente-locacional" },
+    { "condicionanteId": "lideranca", "indicadorId": "relevancia-empresarial" },
+    { "condicionanteId": "confianca-agentes", "indicadorId": "taxa-cooperacao" },
+    { "condicionanteId": "cooperacao", "indicadorId": "taxa-cooperacao" },
+    { "condicionanteId": "estrutura-governanca", "indicadorId": "num-organizacoes-estruturadas" },
+    { "condicionanteId": "eficiencia-coletiva", "indicadorId": "relevancia-valor-transformacao" },
+    { "condicionanteId": "criacao-conhecimento-inovacao", "indicadorId": "aprendizagem-interna" }
+  ]
+}

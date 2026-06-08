@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de avaliação de desempenho de Arranjos Produtivos Locais (APLs) — governança, cooperação, inovação e impacto socioeconômico.">
+  <title>APLs — Modelo de Avaliação de Desempenho</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
+
+  <header class="site-header-banner mb-4" role="banner">
+    <div class="site-header-banner__shell">
+      <div class="site-header-banner__frame">
+        <img
+          src="img/brand/cabecalho.png"
+          alt="Cabeçalho institucional — Programa em Desenvolvimento Local"
+          class="site-header-banner__img"
+          width="1243"
+          height="151"
+          decoding="async"
+          fetchpriority="high">
+      </div>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <div class="sidebar__brand">
+        <span class="sidebar__icon" aria-hidden="true">◈</span>
+        <div>
+          <strong>APLs</strong>
+          <small>Avaliação de Desempenho</small>
+        </div>
+      </div>
+      <nav class="sidebar__nav">
+        <button class="nav-btn active" data-view="dashboard" type="button">
+          <span aria-hidden="true">▣</span> Dashboard
+        </button>
+        <button class="nav-btn" data-view="avaliacoes" type="button">
+          <span aria-hidden="true">☰</span> Avaliações
+        </button>
+        <button class="nav-btn" data-view="nova-avaliacao" type="button">
+          <span aria-hidden="true">＋</span> Nova Avaliação
+        </button>
+        <button class="nav-btn" data-view="comparar" type="button">
+          <span aria-hidden="true">⇄</span> Comparar APLs
+        </button>
+        <button class="nav-btn" data-view="modelo" type="button">
+          <span aria-hidden="true">◎</span> Modelo Teórico
+        </button>
+        <button class="nav-btn" data-view="ibge" type="button">
+          <span aria-hidden="true">⬡</span> Dados IBGE
+        </button>
+      </nav>
+      <div class="sidebar__actions">
+        <button class="btn btn--ghost btn--sm" id="btn-export" type="button">Exportar JSON</button>
+        <label class="btn btn--ghost btn--sm btn--file">
+          Importar JSON
+          <input type="file" id="input-import" accept=".json" hidden>
+        </label>
+      </div>
+    </aside>
+
+    <main id="main-content" class="main-content">
+      <!-- Dashboard -->
+      <section id="view-dashboard" class="view active" aria-labelledby="dash-title">
+        <p class="dashboard-topic">Governança Corporativa e Ambiental</p>
+        <header class="view-header">
+          <div>
+            <h1 id="dash-title" class="view-title">Dashboard</h1>
+            <p class="view-subtitle">Visão geral do desempenho dos Arranjos Produtivos Locais cadastrados</p>
+          </div>
+          <div class="view-header__actions">
+            <select id="dash-filter-topico" class="select" aria-label="Filtrar por tópico">
+              <option value="">Todos os tópicos</option>
+            </select>
+            <select id="dash-filter-uf" class="select" aria-label="Filtrar por UF">
+              <option value="">Todas as UFs</option>
+            </select>
+          </div>
+        </header>
+
+        <div class="kpi-grid" id="kpi-grid"></div>
+
+        <div class="charts-grid">
+          <article class="card card--chart">
+            <div class="card__header">
+              <h2 class="card__title">Desempenho por Dimensão</h2>
+              <p class="card__desc">Média das quatro dimensões analíticas do modelo</p>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="chart-dimensoes" aria-label="Gráfico radar das dimensões"></canvas>
+            </div>
+          </article>
+          <article class="card card--chart">
+            <div class="card__header">
+              <h2 class="card__title">Score Médio por Tópico</h2>
+              <p class="card__desc">TI, Agronegócio, Turismo Regional e Indústria</p>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="chart-topicos" aria-label="Gráfico por tópico setorial"></canvas>
+            </div>
+          </article>
+          <article class="card card--chart">
+            <div class="card__header">
+              <h2 class="card__title">Distribuição por Tópico</h2>
+              <p class="card__desc">Participação dos APLs por setor temático</p>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="chart-distribuicao"></canvas>
+            </div>
+          </article>
+          <article class="card card--chart">
+            <div class="card__header">
+              <h2 class="card__title">Panorama IBGE por Região</h2>
+              <p class="card__desc">População dos municípios-sede por região</p>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="chart-ibge-regiao"></canvas>
+            </div>
+          </article>
+        </div>
+
+        <div class="grid-2 grid-2--equal mt-4">
+          <article class="card card--panel">
+            <div class="card__header">
+              <h2 class="card__title">Ranking de APLs</h2>
+              <p class="card__desc">Ordenado por score geral de desempenho</p>
+            </div>
+            <div id="ranking-list" class="ranking-list ranking-list--scroll"></div>
+          </article>
+          <article class="card card--panel">
+            <div class="card__header">
+              <h2 class="card__title">Mapa de Gargalos</h2>
+              <p class="card__desc">Indicadores abaixo de 60% — prioridade de intervenção</p>
+            </div>
+            <div id="gargalos-grid" class="gargalos-grid gargalos-grid--scroll"></div>
+          </article>
+        </div>
+
+        <article class="card mt-4">
+          <div class="card__header">
+            <h2 class="card__title">Casos Conhecidos — Contexto IBGE</h2>
+            <p class="card__desc">População, PIB per capita, IDHM e indicador setorial por município</p>
+          </div>
+          <div id="casos-ibge-grid" class="casos-ibge-grid"></div>
+        </article>
+      </section>
+
+      <!-- Avaliações -->
+      <section id="view-avaliacoes" class="view" aria-labelledby="avaliacoes-title" hidden>
+        <header class="view-header">
+          <div>
+            <h1 id="avaliacoes-title" class="view-title">Avaliações Cadastradas</h1>
+            <p class="view-subtitle">Lista de APLs avaliados com scores por dimensão</p>
+          </div>
+        </header>
+        <div id="avaliacoes-grid" class="apl-grid"></div>
+      </section>
+
+      <!-- Nova Avaliação -->
+      <section id="view-nova-avaliacao" class="view" aria-labelledby="nova-title" hidden>
+        <header class="view-header">
+          <div>
+            <h1 id="nova-title" class="view-title">Nova Avaliação</h1>
+            <p class="view-subtitle">Cadastre ou edite indicadores quantitativos e qualitativos de um APL</p>
+          </div>
+        </header>
+        <form id="form-avaliacao" class="form-avaliacao">
+          <fieldset class="form-section">
+            <legend>Identificação do APL</legend>
+            <div class="form-grid">
+              <label class="field">
+                <span>Nome do APL *</span>
+                <input type="text" name="nome" required placeholder="Ex.: Polo Calçadista de Franca">
+              </label>
+              <label class="field">
+                <span>Setor *</span>
+                <input type="text" name="setor" required placeholder="Ex.: Calçados e Couro">
+              </label>
+              <label class="field">
+                <span>UF *</span>
+                <select name="uf" id="form-uf" required></select>
+              </label>
+              <label class="field">
+                <span>Município *</span>
+                <input type="text" name="municipio" required placeholder="Ex.: Franca">
+              </label>
+              <label class="field">
+                <span>Ano de referência</span>
+                <input type="number" name="anoReferencia" min="2000" max="2030" value="2025">
+              </label>
+              <label class="field field--full">
+                <span>Observações</span>
+                <textarea name="observacoes" rows="2" placeholder="Contexto, particularidades do arranjo..."></textarea>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>Indicadores Quantitativos</legend>
+            <div id="indicadores-form" class="indicadores-form"></div>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>Avaliação Qualitativa por Dimensão (1–5)</legend>
+            <div id="qualitativos-form" class="qualitativos-form"></div>
+          </fieldset>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary">Salvar Avaliação</button>
+            <button type="button" class="btn btn--ghost" id="btn-cancel-edit">Cancelar</button>
+          </div>
+          <input type="hidden" name="editId" value="">
+        </form>
+      </section>
+
+      <!-- Comparar -->
+      <section id="view-comparar" class="view" aria-labelledby="comparar-title" hidden>
+        <header class="view-header">
+          <div>
+            <h1 id="comparar-title" class="view-title">Comparar APLs</h1>
+            <p class="view-subtitle">Análise comparativa entre arranjos selecionados</p>
+          </div>
+        </header>
+        <div class="compare-selectors">
+          <label class="field">
+            <span>APL A</span>
+            <select id="compare-a"></select>
+          </label>
+          <label class="field">
+            <span>APL B</span>
+            <select id="compare-b"></select>
+          </label>
+          <button class="btn btn--primary" id="btn-compare" type="button">Comparar</button>
+        </div>
+        <div class="grid-2 grid-2--equal mt-4">
+          <article class="card card--chart">
+            <div class="card__header">
+              <h2 class="card__title">Comparativo por Dimensão</h2>
+              <p class="card__desc">Scores lado a lado entre os APLs selecionados</p>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="chart-comparar"></canvas>
+            </div>
+          </article>
+          <article class="card card--panel">
+            <div class="card__header">
+              <h2 class="card__title">Indicadores Detalhados</h2>
+              <p class="card__desc">Valores absolutos e diferença percentual</p>
+            </div>
+            <div id="compare-table" class="panel-scroll"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Modelo Teórico -->
+      <section id="view-modelo" class="view" aria-labelledby="modelo-title" hidden>
+        <header class="view-header">
+          <div>
+            <h1 id="modelo-title" class="view-title">Modelo Teórico</h1>
+            <p class="view-subtitle">Condicionantes territoriais × indicadores de desempenho (Cardoso &amp; Mendonça, Cap. 3)</p>
+          </div>
+        </header>
+
+        <div class="modelo-intro card">
+          <p>O modelo associa <strong>15 condicionantes territoriais</strong> a <strong>12 indicadores de desempenho</strong>, organizados em quatro dimensões analíticas: governança, cooperação, inovação e impacto socioeconômico. Permite mensurar comportamentos isolados e estabelecer comparações entre APLs.</p>
+        </div>
+
+        <div class="dimensoes-tabs" id="dimensoes-tabs" role="tablist"></div>
+        <div id="modelo-content"></div>
+
+        <article class="card mt-4">
+          <h2 class="card__title">Quadro 3 — Associações Condicionante × Indicador</h2>
+          <div class="table-wrap">
+            <table class="data-table" id="tabela-associacoes">
+              <thead>
+                <tr>
+                  <th>Dimensão</th>
+                  <th>Condicionante</th>
+                  <th>Indicador</th>
+                  <th>Unidade</th>
+                  <th>Fontes de Dados</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- Dados IBGE -->
+      <section id="view-ibge" class="view" aria-labelledby="ibge-title" hidden>
+        <header class="view-header">
+          <div>
+            <h1 id="ibge-title" class="view-title">Dados IBGE</h1>
+            <p class="view-subtitle">Contexto socioeconômico dos estados brasileiros via API de dados abertos</p>
+          </div>
+          <button class="btn btn--primary" id="btn-sync-ibge" type="button">Sincronizar com IBGE</button>
+        </header>
+
+        <div class="ibge-status card" id="ibge-status">
+          <p>Selecione um estado ou sincronize todos para enriquecer as avaliações com dados demográficos e econômicos.</p>
+        </div>
+
+        <div class="form-grid mb-4">
+          <label class="field">
+            <span>Estado</span>
+            <select id="ibge-uf"></select>
+          </label>
+          <label class="field">
+            <span>Município (opcional)</span>
+            <input type="text" id="ibge-municipio" placeholder="Nome do município">
+          </label>
+          <div class="field field--action">
+            <span>&nbsp;</span>
+            <button class="btn btn--secondary" id="btn-buscar-ibge" type="button">Buscar Dados</button>
+          </div>
+        </div>
+
+        <div id="ibge-results" class="ibge-results"></div>
+
+        <article class="card card--chart mt-4">
+          <div class="card__header">
+            <h2 class="card__title">APLs por Região</h2>
+            <p class="card__desc">Quantidade de arranjos cadastrados por região</p>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="chart-regioes"></canvas>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <aside class="fontes-pesquisa" aria-labelledby="fontes-title">
+    <div class="fontes-pesquisa__container">
+      <h2 id="fontes-title" class="fontes-pesquisa__title">Fontes da Pesquisa e Dados IBGE</h2>
+      <div class="fontes-pesquisa__grid">
+        <section class="fontes-pesquisa__bloco">
+          <h3 class="fontes-pesquisa__subtitulo">Referência teórica</h3>
+          <ul class="fontes-pesquisa__lista">
+            <li>
+              <strong>Cardoso, A. F.; Mendonça, F. M.</strong>
+              Modelo de avaliação de desempenho de arranjos produtivos locais.
+              In: <em>Sustentabilidade e Responsabilidade Social</em>, Vol. 1, Cap. 3, p. 25–40.
+            </li>
+            <li>Cassiolato, J. E. et al. Indicadores para Arranjos Produtivos Locais — MDIC/REDESIST/UFRJ.</li>
+            <li>Stallivieri, F. (2009). Ensaios sobre Aprendizagem, Cooperação e Inovação em Aglomerações Produtivas.</li>
+          </ul>
+        </section>
+        <section class="fontes-pesquisa__bloco">
+          <h3 class="fontes-pesquisa__subtitulo">Dados IBGE — API e bases utilizadas</h3>
+          <ul class="fontes-pesquisa__lista">
+            <li>
+              <a href="https://servicodados.ibge.gov.br/api/docs" target="_blank" rel="noopener noreferrer">
+                IBGE — API de Dados Abertos (servicodados.ibge.gov.br)
+              </a>
+            </li>
+            <li>Estimativas de população residente — Agregado 6579 / SIDRA</li>
+            <li>PIB per capita municipal — Contas Regionais do Brasil (Agregado 5938)</li>
+            <li>IDHM — Atlas Brasil (referência contextual por município)</li>
+            <li>RAIS / CAGED — emprego formal e indicadores setoriais</li>
+            <li>PAM, PPM e Censo Agropecuário — agronegócio e produção agrícola</li>
+            <li>PNAD Contínua — turismo, TI e ocupação por setor</li>
+            <li>Censo Demográfico 2022 — domicílios e estrutura socioeconômica</li>
+          </ul>
+        </section>
+        <section class="fontes-pesquisa__bloco fontes-pesquisa__bloco--nota">
+          <h3 class="fontes-pesquisa__subtitulo">Nota metodológica</h3>
+          <p class="fontes-pesquisa__texto">
+            Os indicadores de desempenho dos APLs seguem o modelo teórico do Capítulo 3 (condicionantes × indicadores).
+            Os dados socioeconômicos municipais e estaduais são enriquecidos via integração com a API do IBGE e bases
+            complementares citadas no Quadro 3 da referência. Valores seed podem ser atualizados pela função
+            <strong>Sincronizar com IBGE</strong> na aba Dados IBGE.
+          </p>
+          <p class="fontes-pesquisa__atualizacao">
+            Última referência de dados: 2024–2025 · Fonte primária: Instituto Brasileiro de Geografia e Estatística (IBGE)
+          </p>
+        </section>
+      </div>
+    </div>
+  </aside>
+
+  <footer class="ppgdl-site-footer text-white" role="contentinfo">
+    <div class="container py-4 py-lg-5">
+      <div class="ppgdl-site-footer__inner d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-4">
+        <a href="https://rodrigobragatere.com" class="ppgdl-footer-logo-link flex-shrink-0" target="_blank" rel="noopener noreferrer" aria-label="Site Rodrigo Braga">
+          <img src="img/brand/logoNovoPng.png" width="72" class="ppgdl-footer-logo" alt="Logotipo Rodrigo Braga">
+        </a>
+        <div class="ppgdl-site-footer__text text-center text-md-start">
+          <p class="ppgdl-footer-copy text-uppercase mb-2 mb-md-3">© 2026 Rodrigo Braga · Todos os direitos reservados.</p>
+          <a href="https://rodrigobragatere.com" class="ppgdl-footer-url d-inline-block text-uppercase text-decoration-none fw-bold" target="_blank" rel="noopener noreferrer">rodrigobragatere.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

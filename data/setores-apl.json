@@ -1,0 +1,36 @@
+{
+  "topicos": [
+    {
+      "id": "tecnologia-informacao",
+      "nome": "Tecnologia da Informação",
+      "descricao": "APLs de software, TI, inovação digital e parques tecnológicos com alta densidade de empresas de base tecnológica.",
+      "cor": "#0ea5e9",
+      "fontesIbge": ["PNAD Contínua", "Censo 2022", "PIB dos Municípios"],
+      "indicadoresContexto": ["populacao", "pibPerCapita", "peaTI", "estabelecimentosTI"]
+    },
+    {
+      "id": "agronegocio",
+      "nome": "Agronegócio",
+      "descricao": "Arranjos agroindustriais, cooperativas, cadeias do leite, fruticultura, grãos e agroindústria com vocação exportadora.",
+      "cor": "#84cc16",
+      "fontesIbge": ["PAM", "PPM", "Censo Agropecuário", "SIDRA — Produção Agrícola"],
+      "indicadoresContexto": ["populacao", "pibPerCapita", "areaPlantada", "rebanho", "vbpAgro"]
+    },
+    {
+      "id": "turismo-regional",
+      "nome": "Turismo Regional",
+      "descricao": "Rotas turísticas, polos de ecoturismo, enoturismo e arranjos de serviços vinculados ao patrimônio natural e cultural.",
+      "cor": "#f59e0b",
+      "fontesIbge": ["PNAD Contínua — Turismo", "Mapa do Turismo Brasileiro", "Contas Regionais"],
+      "indicadoresContexto": ["populacao", "pibPerCapita", "leitos", "domiciliosTemporarios", "empregosTurismo"]
+    },
+    {
+      "id": "industria-tradicional",
+      "nome": "Indústria Tradicional",
+      "descricao": "APLs manufatureiros consolidados — calçados, têxtil, móveis, cerâmica e outros setores de base local.",
+      "cor": "#007247",
+      "fontesIbge": ["RAIS", "PIA", "PAS", "Censo 2022"],
+      "indicadoresContexto": ["populacao", "pibPerCapita", "empregoIndustrial", "qlSetorial"]
+    }
+  ]
+}
