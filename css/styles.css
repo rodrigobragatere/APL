@@ -448,6 +448,81 @@ body {
   border-radius: var(--radius-sm);
 }
 
+/* ODS badges */
+.ods-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+.ods-badges--sm { margin-bottom: 0.5rem; }
+.ods-badges__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-right: 0.15rem;
+}
+.ods-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: default;
+}
+
+.ods-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.5rem;
+}
+.form-section__hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: -0.25rem 0 1rem;
+}
+.ods-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+.ods-check:hover { background: var(--surface-2); }
+.ods-check:has(input:checked) {
+  border-color: var(--ods-color);
+  background: color-mix(in srgb, var(--ods-color) 8%, transparent);
+}
+.ods-check input { position: absolute; opacity: 0; pointer-events: none; }
+.ods-check__badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--ods-color);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.ods-check__nome {
+  font-size: 0.8rem;
+  line-height: 1.25;
+  color: var(--text);
+}
+
 /* Ranking */
 .ranking-list { display: flex; flex-direction: column; gap: 0.75rem; }
 .ranking-item {

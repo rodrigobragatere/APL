@@ -2,7 +2,7 @@
  * Persistência JSON — localStorage + sync com arquivo seed
  */
 const STORAGE_KEY = 'apl_avaliacoes_v1';
-const SEED_VERSION = '1.1.0';
+const SEED_VERSION = '1.2.0';
 
 export async function loadSeedData() {
   const res = await fetch('data/avaliacoes.json');
@@ -13,6 +13,12 @@ export async function loadSeedData() {
 export async function loadSetores() {
   const res = await fetch('data/setores-apl.json');
   if (!res.ok) throw new Error('Falha ao carregar setores');
+  return res.json();
+}
+
+export async function loadOds() {
+  const res = await fetch('data/ods.json');
+  if (!res.ok) throw new Error('Falha ao carregar ODS');
   return res.json();
 }
 
@@ -60,8 +66,12 @@ export async function initStorage() {
       if (!ids.has(a.id)) stored.avaliacoes.push(a);
       else {
         const idx = stored.avaliacoes.findIndex((x) => x.id === a.id);
-        if (!stored.avaliacoes[idx].ibge?.populacao && a.ibge?.populacao) {
-          stored.avaliacoes[idx] = { ...stored.avaliacoes[idx], ...a, indicadores: stored.avaliacoes[idx].indicadores };
+        const current = stored.avaliacoes[idx];
+        if (!current.ibge?.populacao && a.ibge?.populacao) {
+          stored.avaliacoes[idx] = { ...current, ...a, indicadores: current.indicadores };
+        }
+        if (!current.ods?.length && a.ods?.length) {
+          stored.avaliacoes[idx] = { ...stored.avaliacoes[idx], ods: a.ods };
         }
       }
     });

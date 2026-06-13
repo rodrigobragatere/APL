@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.1.0",
+  "schemaVersion": "1.2.0",
   "ultimaAtualizacao": "2026-05-27T18:00:00.000Z",
   "avaliacoes": [
     {
@@ -13,6 +13,7 @@
       "regiao": "Sudeste",
       "anoReferencia": 2025,
       "observacoes": "Arranjo tradicional com forte densidade empresarial e redes de cooperação consolidadas.",
+      "ods": [8, 9, 12, 17],
       "indicadores": {
         "esforco-pd": 4.2,
         "valor-adicionado": 38.5,
@@ -56,6 +57,7 @@
       "regiao": "Sul",
       "anoReferencia": 2025,
       "observacoes": "Cluster com tradição exportadora e infraestrutura logística favorável.",
+      "ods": [8, 9, 12, 17],
       "indicadores": {
         "esforco-pd": 3.1,
         "valor-adicionado": 35.0,
@@ -99,6 +101,7 @@
       "regiao": "Sudeste",
       "anoReferencia": 2025,
       "observacoes": "Arranjo em consolidação com potencial de fortalecimento institucional.",
+      "ods": [8, 9, 12, 15],
       "indicadores": {
         "esforco-pd": 2.0,
         "valor-adicionado": 28.0,
@@ -142,6 +145,7 @@
       "regiao": "Nordeste",
       "anoReferencia": 2025,
       "observacoes": "Arranjo periférico com desafios de infraestrutura e articulação institucional.",
+      "ods": [1, 8, 9, 11],
       "indicadores": {
         "esforco-pd": 0.8,
         "valor-adicionado": 22.0,
@@ -185,6 +189,7 @@
       "regiao": "Sul",
       "anoReferencia": 2025,
       "observacoes": "Parque tecnológico vinculado à PUCRS; referência nacional em software, games e serviços de TI.",
+      "ods": [4, 8, 9, 17],
       "indicadores": {
         "esforco-pd": 8.5,
         "valor-adicionado": 52.0,
@@ -228,6 +233,7 @@
       "regiao": "Nordeste",
       "anoReferencia": 2025,
       "observacoes": "Maior parque tecnológico urbano do Brasil; hub de software, EPs e economia criativa digital.",
+      "ods": [4, 8, 9, 10, 17],
       "indicadores": {
         "esforco-pd": 7.2,
         "valor-adicionado": 48.0,
@@ -271,6 +277,7 @@
       "regiao": "Sudeste",
       "anoReferencia": 2025,
       "observacoes": "Arranjo agroindustrial do leite com UFV como polo de pesquisa e extensão; cooperativas consolidadas.",
+      "ods": [2, 8, 12, 15, 17],
       "indicadores": {
         "esforco-pd": 3.5,
         "valor-adicionado": 32.0,
@@ -314,6 +321,7 @@
       "regiao": "Sul",
       "anoReferencia": 2025,
       "observacoes": "Arranjo de maçã, uva e frutas de clima temperado; cooperativas e agroindústria exportadora.",
+      "ods": [2, 8, 12, 15],
       "indicadores": {
         "esforco-pd": 2.8,
         "valor-adicionado": 36.0,
@@ -357,6 +365,7 @@
       "regiao": "Nordeste",
       "anoReferencia": 2025,
       "observacoes": "Arranjo turístico integrado CE-PI-MA; ecoturismo, dunas, lagoas e patrimônio natural do litoral nordestino.",
+      "ods": [8, 11, 13, 14, 15],
       "indicadores": {
         "esforco-pd": 1.5,
         "valor-adicionado": 42.0,
@@ -400,6 +409,7 @@
       "regiao": "Sul",
       "anoReferencia": 2025,
       "observacoes": "Capital brasileira do vinho; roteiros enoturísticos, vinícolas e agroindústria vitivinícola integrada.",
+      "ods": [8, 11, 12, 15],
       "indicadores": {
         "esforco-pd": 2.2,
         "valor-adicionado": 45.0,

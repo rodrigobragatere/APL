@@ -4,7 +4,7 @@
  */
 import {
   initStorage, getAvaliacoes, saveAvaliacoes, exportJSON, importJSON,
-  upsertAvaliacao, deleteAvaliacao, generateId, loadEstados, loadSetores,
+  upsertAvaliacao, deleteAvaliacao, generateId, loadEstados, loadSetores, loadOds,
 } from './storage.js';
 import {
   calcularDimensaoScores, calcularScoreGeral, identificarGargalos,
@@ -21,6 +21,7 @@ let state = {
   modelo: null,
   estados: null,
   setores: null,
+  ods: null,
   ibgeCache: {},
   charts: {},
   editingId: null,
@@ -121,6 +122,25 @@ function getTopicoNome(id) {
 
 function getTopicoCor(id) {
   return state.setores?.topicos.find((t) => t.id === id)?.cor || '#007247';
+}
+
+function getOdsInfo(numero) {
+  return state.ods?.objetivos.find((o) => o.numero === numero);
+}
+
+function renderOdsBadges(odsNumeros, { size = 'sm' } = {}) {
+  if (!odsNumeros?.length || !state.ods) return '';
+  const sorted = [...odsNumeros].sort((a, b) => a - b);
+  return `
+    <div class="ods-badges ods-badges--${size}" aria-label="Objetivos de Desenvolvimento Sustentável">
+      <span class="ods-badges__label">ODS</span>
+      ${sorted.map((num) => {
+        const ods = getOdsInfo(num);
+        if (!ods) return '';
+        return `<span class="ods-badge" style="background:${ods.cor}" title="ODS ${ods.numero} — ${ods.nome}">${ods.numero}</span>`;
+      }).join('')}
+    </div>
+  `;
 }
 
 function populateTopicoSelect() {
@@ -357,6 +377,7 @@ function renderCasosIbgeGrid(apls) {
         </div>
         <h3 class="caso-ibge-card__nome">${a.nome}</h3>
         <p class="caso-ibge-card__local">${a.municipio}/${a.uf} · ${a.setor}</p>
+        ${renderOdsBadges(a.ods)}
         <div class="caso-ibge-card__stats">
           <div class="caso-ibge-stat">
             <span>População</span>
@@ -501,6 +522,7 @@ function renderAvaliacoes() {
         </div>
         <div class="apl-card__meta">${a.setor} · ${a.municipio} · ${a.regiao} · Score: <strong>${scoreGeral}</strong></div>
         ${a.topico ? `<span class="apl-card__topico" style="background:${getTopicoCor(a.topico)}22;color:${getTopicoCor(a.topico)}">${getTopicoNome(a.topico)}</span>` : ''}
+        ${renderOdsBadges(a.ods)}
         ${a.ibge?.populacao ? `<div class="apl-card__ibge">IBGE: ${formatNumber(a.ibge.populacao)} hab. · PIB/cap. ${formatCurrency(a.ibge.pibPerCapita)}</div>` : ''}
         <div class="dim-bars">${bars}</div>
         <div class="apl-card__actions">
@@ -577,6 +599,17 @@ function renderForm() {
     </div>
   `).join('');
 
+  const odsContainer = $('#ods-form');
+  if (odsContainer && state.ods) {
+    odsContainer.innerHTML = state.ods.objetivos.map((ods) => `
+      <label class="ods-check" style="--ods-color:${ods.cor}">
+        <input type="checkbox" name="ods" value="${ods.numero}">
+        <span class="ods-check__badge">${ods.numero}</span>
+        <span class="ods-check__nome">${ods.nome}</span>
+      </label>
+    `).join('');
+  }
+
   if (state.editingId) {
     const a = state.data.avaliacoes.find((x) => x.id === state.editingId);
     if (a) {
@@ -599,11 +632,16 @@ function renderForm() {
         if (range) range.value = qual.nota || 3;
         if (comment) comment.value = qual.comentario || '';
       }
+
+      form.querySelectorAll('[name="ods"]').forEach((cb) => {
+        cb.checked = (a.ods || []).includes(parseInt(cb.value, 10));
+      });
     }
   } else {
     form.reset();
     form.editId.value = '';
     form.anoReferencia.value = 2025;
+    form.querySelectorAll('[name="ods"]').forEach((cb) => { cb.checked = false; });
   }
 }
 
@@ -630,7 +668,11 @@ function handleFormSubmit(e) {
   });
 
   const editId = fd.get('editId');
+  const existing = editId ? state.data.avaliacoes.find((a) => a.id === editId) : null;
+  const ods = [...fd.getAll('ods')].map((v) => parseInt(v, 10)).filter(Boolean).sort((a, b) => a - b);
+
   const avaliacao = {
+    ...(existing || {}),
     id: editId || generateId(),
     nome: fd.get('nome'),
     setor: fd.get('setor'),
@@ -639,11 +681,10 @@ function handleFormSubmit(e) {
     regiao: ufInfo?.regiao || '',
     anoReferencia: parseInt(fd.get('anoReferencia'), 10) || 2025,
     observacoes: fd.get('observacoes') || '',
+    ods,
     indicadores,
     qualitativos,
-    ibge: editId
-      ? state.data.avaliacoes.find((a) => a.id === editId)?.ibge || {}
-      : { populacao: null, pibPerCapita: null, sincronizadoEm: null },
+    ibge: existing?.ibge || { populacao: null, pibPerCapita: null, sincronizadoEm: null },
   };
 
   upsertAvaliacao(state.data, avaliacao);
@@ -930,11 +971,12 @@ function initImportExport() {
 /* ── Init ── */
 async function init() {
   try {
-    [state.data, state.modelo, state.estados, state.setores] = await Promise.all([
+    [state.data, state.modelo, state.estados, state.setores, state.ods] = await Promise.all([
       initStorage(),
       loadModelo(),
       loadEstados(),
       loadSetores(),
+      loadOds(),
     ]);
 
     initNav();

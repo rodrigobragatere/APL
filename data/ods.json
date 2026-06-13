@@ -1,0 +1,21 @@
+{
+  "objetivos": [
+    { "numero": 1, "nome": "Erradicação da Pobreza", "cor": "#E5243B" },
+    { "numero": 2, "nome": "Fome Zero e Agricultura Sustentável", "cor": "#DDA63A" },
+    { "numero": 3, "nome": "Saúde e Bem-Estar", "cor": "#4C9F38" },
+    { "numero": 4, "nome": "Educação de Qualidade", "cor": "#C5192D" },
+    { "numero": 5, "nome": "Igualdade de Gênero", "cor": "#FF3A21" },
+    { "numero": 6, "nome": "Água Potável e Saneamento", "cor": "#26BDE2" },
+    { "numero": 7, "nome": "Energia Limpa e Acessível", "cor": "#FCC30B" },
+    { "numero": 8, "nome": "Trabalho Decente e Crescimento Econômico", "cor": "#A21942" },
+    { "numero": 9, "nome": "Indústria, Inovação e Infraestrutura", "cor": "#FD6925" },
+    { "numero": 10, "nome": "Redução das Desigualdades", "cor": "#DD1367" },
+    { "numero": 11, "nome": "Cidades e Comunidades Sustentáveis", "cor": "#FD9D24" },
+    { "numero": 12, "nome": "Consumo e Produção Responsáveis", "cor": "#BF8B2E" },
+    { "numero": 13, "nome": "Ação Contra a Mudança Global do Clima", "cor": "#3F7E44" },
+    { "numero": 14, "nome": "Vida na Água", "cor": "#0A97D9" },
+    { "numero": 15, "nome": "Vida Terrestre", "cor": "#56C02B" },
+    { "numero": 16, "nome": "Paz, Justiça e Instituições Eficazes", "cor": "#00689D" },
+    { "numero": 17, "nome": "Parcerias e Meios de Implementação", "cor": "#19486A" }
+  ]
+}
